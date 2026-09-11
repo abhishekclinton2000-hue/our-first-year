@@ -168,9 +168,8 @@ const CONFIG = {
      finalClosing: "Here's to us, and to all the memories we haven't made yet. ❤️",
 
      // ---- Music ----
-     // Put the song file inside the "music" folder and name it exactly: our-song.mp3
-     // (the website will show the song title on the button)
-     musicFile: "music/our-song.mp3",
+     // The song streams directly from the artist's official YouTube video (no file upload needed).
+     musicVideoId: "e1mOmdykmwI",
      songTitle: "Call It",
      songArtist: "Elliot James Reay",
 };

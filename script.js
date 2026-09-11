@@ -1,10 +1,10 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-  function $(id) { return document.getElementById(id); }
+                          function $(id) { return document.getElementById(id); }
   function setText(id, value) { var el = $(id); if (el && value !== undefined) el.textContent = value; }
 
-  /* ---------- Small on-screen message (replaces pop-up alerts) ---------- */
-  var toast = $('toast');
+                          /* ---------- Small on-screen message (replaces pop-up alerts) ---------- */
+                          var toast = $('toast');
   var toastTimer = null;
   function showToast(msg) {
     toast.textContent = msg;
@@ -13,17 +13,17 @@ document.addEventListener('DOMContentLoaded', function () {
     toastTimer = setTimeout(function () { toast.classList.remove('show'); }, 4500);
   }
 
-  /* ---------- Hero text ---------- */
-  setText('heroEyebrow', CONFIG.heroEyebrow);
+                          /* ---------- Hero text ---------- */
+                          setText('heroEyebrow', CONFIG.heroEyebrow);
   setText('heroTitle', CONFIG.heroTitle);
   setText('heroSub', CONFIG.heroSubtitle);
   document.title = CONFIG.heroTitle || document.title;
 
-  /* ---------- Anniversary counter (counts up from the first date) ---------- */
-  function parseLocalDate(str) {
-    var p = String(str).split('-');
-    return new Date(parseInt(p[0], 10), parseInt(p[1], 10) - 1, parseInt(p[2], 10));
-  }
+                          /* ---------- Anniversary counter (counts up from the first date) ---------- */
+                          function parseLocalDate(str) {
+                            var p = String(str).split('-');
+                            return new Date(parseInt(p[0], 10), parseInt(p[1], 10) - 1, parseInt(p[2], 10));
+                          }
   function prettyDate(d) {
     var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     return months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var anniversary = parseLocalDate(CONFIG.anniversaryDate);
   setText('counterLabel', CONFIG.counterLabel || ('Together since ' + prettyDate(firstDate)));
 
-  function pad(n) { return n < 10 ? '0' + n : String(n); }
+                          function pad(n) { return n < 10 ? '0' + n : String(n); }
   function tick() {
     var now = new Date();
     var diff = now - firstDate;
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function () {
     $('cMins').textContent = pad(Math.floor(totalSec / 60) % 60);
     $('cSecs').textContent = pad(totalSec % 60);
 
-    var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     var daysTo = Math.round((anniversary - today) / 86400000);
     var note;
     if (daysTo > 1) note = daysTo + ' days until our first anniversary 🎉';
@@ -55,15 +55,15 @@ document.addEventListener('DOMContentLoaded', function () {
   tick();
   setInterval(tick, 1000);
 
-  /* ---------- Photo wall (polaroids) ---------- */
-  var photoWall = $('photoWall');
+                          /* ---------- Photo wall (polaroids) ---------- */
+                          var photoWall = $('photoWall');
   var photos = CONFIG.photos || [];
   photos.forEach(function (p, i) {
     var card = document.createElement('div');
     card.className = 'polaroid';
     card.style.animationDelay = Math.min(i * 60, 900) + 'ms';
 
-    var img = document.createElement('img');
+                 var img = document.createElement('img');
     img.src = p.thumb || p.src;
     img.alt = p.caption ? p.caption : ('Our memory ' + (i + 1));
     img.loading = 'lazy';
@@ -77,22 +77,22 @@ document.addEventListener('DOMContentLoaded', function () {
     };
     card.appendChild(img);
 
-    if (p.caption) {
-      var cap = document.createElement('span');
-      cap.className = 'cap';
-      cap.textContent = p.caption;
-      card.appendChild(cap);
-    }
+                 if (p.caption) {
+                   var cap = document.createElement('span');
+                   cap.className = 'cap';
+                   cap.textContent = p.caption;
+                   card.appendChild(cap);
+                 }
 
-    card.addEventListener('click', function () {
-      if (card.querySelector('img')) openLightbox(i);
-    });
+                 card.addEventListener('click', function () {
+                   if (card.querySelector('img')) openLightbox(i);
+                 });
 
-    photoWall.appendChild(card);
+                 photoWall.appendChild(card);
   });
 
-  /* ---------- Our Story ---------- */
-  setText('storySub', CONFIG.storySubtitle);
+                          /* ---------- Our Story ---------- */
+                          setText('storySub', CONFIG.storySubtitle);
   var storyText = $('storyText');
   (CONFIG.story || []).forEach(function (para) {
     var el = document.createElement('p');
@@ -102,8 +102,8 @@ document.addEventListener('DOMContentLoaded', function () {
   });
   setText('storySignoff', CONFIG.storySignoff);
 
-  /* ---------- Our Little Moments ---------- */
-  var momentsGrid = $('momentsGrid');
+                          /* ---------- Our Little Moments ---------- */
+                          var momentsGrid = $('momentsGrid');
   (CONFIG.littleMoments || []).forEach(function (m) {
     var card = document.createElement('div');
     card.className = 'moment-card reveal';
@@ -114,8 +114,8 @@ document.addEventListener('DOMContentLoaded', function () {
     momentsGrid.appendChild(card);
   });
 
-  /* ---------- Timeline ---------- */
-  var timelineList = $('timelineList');
+                          /* ---------- Timeline ---------- */
+                          var timelineList = $('timelineList');
   (CONFIG.timeline || []).forEach(function (t) {
     var item = document.createElement('div');
     item.className = 'timeline-item reveal';
@@ -126,8 +126,8 @@ document.addEventListener('DOMContentLoaded', function () {
     timelineList.appendChild(item);
   });
 
-  /* ---------- 20 Reasons (flip cards) ---------- */
-  var loveGrid = $('loveGrid');
+                          /* ---------- 20 Reasons (flip cards) ---------- */
+                          var loveGrid = $('loveGrid');
   (CONFIG.loveList || []).forEach(function (l, i) {
     var card = document.createElement('div');
     card.className = 'love-card reveal';
@@ -144,8 +144,8 @@ document.addEventListener('DOMContentLoaded', function () {
     loveGrid.appendChild(card);
   });
 
-  /* ---------- Memory Jar ---------- */
-  setText('jarSub', CONFIG.memoryJarSubtitle);
+                          /* ---------- Memory Jar ---------- */
+                          setText('jarSub', CONFIG.memoryJarSubtitle);
   var jarBtn = $('jarBtn');
   var jarNote = $('jarNote');
   var jarNoteText = $('jarNoteText');
@@ -157,7 +157,7 @@ document.addEventListener('DOMContentLoaded', function () {
     noteIndex = (noteIndex + 1) % notes.length;
     jarBtn.classList.remove('shake');
     void jarBtn.offsetWidth; // restart the animation
-    jarBtn.classList.add('shake');
+                          jarBtn.classList.add('shake');
     jarNote.classList.remove('show');
     setTimeout(function () {
       jarNoteText.textContent = notes[noteIndex];
@@ -166,8 +166,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }, 180);
   });
 
-  /* ---------- Letter ---------- */
-  var letter = CONFIG.letter || {};
+                          /* ---------- Letter ---------- */
+                          var letter = CONFIG.letter || {};
   setText('letterGreeting', letter.greeting);
   var letterBody = $('letterBody');
   (letter.paragraphs || []).forEach(function (para) {
@@ -177,8 +177,8 @@ document.addEventListener('DOMContentLoaded', function () {
   });
   setText('letterSignoff', letter.signoff);
 
-  /* ---------- Secret message ---------- */
-  var secretBtn = $('secretBtn');
+                          /* ---------- Secret message ---------- */
+                          var secretBtn = $('secretBtn');
   var secretMessage = $('secretMessage');
   var secretLabel = CONFIG.secretButton || 'Open My Heart ❤️';
   secretBtn.textContent = secretLabel;
@@ -188,8 +188,8 @@ document.addEventListener('DOMContentLoaded', function () {
     secretBtn.textContent = secretMessage.classList.contains('show') ? 'Close 🐼' : secretLabel;
   });
 
-  /* ---------- Final anniversary reveal ---------- */
-  setText('revealTease', CONFIG.revealTease);
+                          /* ---------- Final anniversary reveal ---------- */
+                          setText('revealTease', CONFIG.revealTease);
   setText('revealDate', CONFIG.revealDate);
   setText('finalLine1', CONFIG.finalLine1);
   setText('finalLine2', CONFIG.finalLine2);
@@ -201,22 +201,22 @@ document.addEventListener('DOMContentLoaded', function () {
   var burst = $('burst');
   revealBtn.textContent = CONFIG.revealButton || 'Tap to open ❤️';
 
-  function burstHearts() {
-    var emojis = ['❤️', '💕', '💗', '🐼', '✨', '💖'];
-    for (var i = 0; i < 36; i++) {
-      var h = document.createElement('span');
-      h.className = 'burst-heart';
-      h.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-      h.style.left = (50 + (Math.random() - 0.5) * 20) + '%';
-      h.style.setProperty('--dx', ((Math.random() - 0.5) * 90) + 'vw');
-      h.style.setProperty('--dy', (-30 - Math.random() * 60) + 'vh');
-      h.style.setProperty('--rot', ((Math.random() - 0.5) * 540) + 'deg');
-      h.style.animationDelay = (Math.random() * 0.3) + 's';
-      h.style.fontSize = (1 + Math.random() * 1.6) + 'rem';
-      burst.appendChild(h);
-    }
-    setTimeout(function () { burst.innerHTML = ''; }, 3200);
-  }
+                          function burstHearts() {
+                            var emojis = ['❤️', '💕', '💗', '🐼', '✨', '💖'];
+                            for (var i = 0; i < 36; i++) {
+                              var h = document.createElement('span');
+                              h.className = 'burst-heart';
+                              h.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                              h.style.left = (50 + (Math.random() - 0.5) * 20) + '%';
+                              h.style.setProperty('--dx', ((Math.random() - 0.5) * 90) + 'vw');
+                              h.style.setProperty('--dy', (-30 - Math.random() * 60) + 'vh');
+                              h.style.setProperty('--rot', ((Math.random() - 0.5) * 540) + 'deg');
+                              h.style.animationDelay = (Math.random() * 0.3) + 's';
+                              h.style.fontSize = (1 + Math.random() * 1.6) + 'rem';
+                              burst.appendChild(h);
+                            }
+                            setTimeout(function () { burst.innerHTML = ''; }, 3200);
+                          }
   function revealFinal(withBurst) {
     finalCover.classList.add('hidden');
     finalContent.classList.add('show');
@@ -228,19 +228,19 @@ document.addEventListener('DOMContentLoaded', function () {
     revealBtn.addEventListener('click', function () { revealFinal(true); });
   }
 
-  /* ---------- Lightbox with arrows, keyboard and swipe ---------- */
-  var lightbox = $('lightbox');
+                          /* ---------- Lightbox with arrows, keyboard and swipe ---------- */
+                          var lightbox = $('lightbox');
   var lightboxImg = $('lightboxImg');
   var lightboxCaption = $('lightboxCaption');
   var lightboxCount = $('lightboxCount');
   var current = 0;
 
-  function preload(i) {
-    if (!photos.length) return;
-    var n = ((i % photos.length) + photos.length) % photos.length;
-    var im = new Image();
-    im.src = photos[n].src;
-  }
+                          function preload(i) {
+                            if (!photos.length) return;
+                            var n = ((i % photos.length) + photos.length) % photos.length;
+                            var im = new Image();
+                            im.src = photos[n].src;
+                          }
   function showPhoto(i) {
     if (!photos.length) return;
     current = ((i % photos.length) + photos.length) % photos.length;
@@ -276,8 +276,8 @@ document.addEventListener('DOMContentLoaded', function () {
     else if (e.key === 'ArrowLeft') showPhoto(current - 1);
   });
 
-  // touch swipe: left/right changes photo, a clear downward swipe closes
-  var touchStartX = 0, touchStartY = 0, touching = false;
+                          // touch swipe: left/right changes photo, a clear downward swipe closes
+                          var touchStartX = 0, touchStartY = 0, touching = false;
   lightbox.addEventListener('touchstart', function (e) {
     if (e.touches.length !== 1) return;
     touching = true;
@@ -297,8 +297,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }, { passive: true });
 
-  /* ---------- Music ---------- */
-  var musicBtn = $('musicBtn');
+                          /* ---------- Music ---------- */
+                          var musicBtn = $('musicBtn');
   var bgMusic = $('bgMusic');
   bgMusic.src = CONFIG.musicFile;
   var songName = CONFIG.songTitle ? '“' + CONFIG.songTitle + '”' : 'Our Song';
@@ -306,14 +306,33 @@ document.addEventListener('DOMContentLoaded', function () {
   var pauseLabel = '🔇 Pause ' + songName;
   musicBtn.textContent = playLabel;
   var playing = false;
+  function musicMissingMessage() {
+    var who = CONFIG.songTitle ? (' (' + CONFIG.songTitle + (CONFIG.songArtist ? ' — ' + CONFIG.songArtist : '') + ')') : '';
+    showToast('Add the song file to the music folder and name it exactly: our-song.mp3' + who);
+  }
   musicBtn.addEventListener('click', function () {
     if (!playing) {
+      var settled = false;
+      // Fail-safe: on some browsers/devices play() can hang without ever
+    // resolving or rejecting when the audio file is missing. If that
+    // happens, still show the friendly reminder instead of the button
+    // silently doing nothing.
+    var failSafe = setTimeout(function () {
+      if (settled) return;
+      settled = true;
+      musicMissingMessage();
+    }, 2500);
       bgMusic.play().then(function () {
+        if (settled) return;
+        settled = true;
+        clearTimeout(failSafe);
         playing = true;
         musicBtn.textContent = pauseLabel;
       }).catch(function () {
-        var who = CONFIG.songTitle ? (' (' + CONFIG.songTitle + (CONFIG.songArtist ? ' — ' + CONFIG.songArtist : '') + ')') : '';
-        showToast('Add the song file to the music folder and name it exactly: our-song.mp3' + who);
+        if (settled) return;
+        settled = true;
+        clearTimeout(failSafe);
+        musicMissingMessage();
       });
     } else {
       bgMusic.pause();
@@ -325,8 +344,8 @@ document.addEventListener('DOMContentLoaded', function () {
     if (playing) { playing = false; musicBtn.textContent = playLabel; }
   });
 
-  /* ---------- Scroll reveal animations ---------- */
-  var revealEls = document.querySelectorAll('.reveal');
+                          /* ---------- Scroll reveal animations ---------- */
+                          var revealEls = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window) {
     var observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
@@ -338,8 +357,8 @@ document.addEventListener('DOMContentLoaded', function () {
     revealEls.forEach(function (el) { el.classList.add('visible'); });
   }
 
-  /* ---------- Floating hearts ---------- */
-  var floatingHearts = $('floatingHearts');
+                          /* ---------- Floating hearts ---------- */
+                          var floatingHearts = $('floatingHearts');
   var heartEmojis = ['❤️', '💕', '🐼', '💗'];
   function spawnHeart() {
     var heart = document.createElement('div');
@@ -353,4 +372,5 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   setInterval(spawnHeart, 1200);
   for (var i = 0; i < 6; i++) { setTimeout(spawnHeart, i * 400); }
+});
 });

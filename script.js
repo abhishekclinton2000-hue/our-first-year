@@ -373,4 +373,3 @@ document.addEventListener('DOMContentLoaded', function () {
   setInterval(spawnHeart, 1200);
   for (var i = 0; i < 6; i++) { setTimeout(spawnHeart, i * 400); }
 });
-})

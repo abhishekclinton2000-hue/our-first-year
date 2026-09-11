@@ -65,9 +65,10 @@ const CONFIG = {
   // ---- "Our Story" (shown under the photos) ----
   storySubtitle: "How this year became my favorite one",
   story: [
-    "It all started with a first date on September 13, 2025. Somewhere between that day and today, you became my favorite person.",
-    "This year gave us our first trip together — Atlantic City — two birthdays (mine on April 11, yours on May 4), and hundreds of ordinary days that you somehow made extraordinary.",
-    "And now here we are: 365 days later. One year of us. I would live every single one of them over again."
+    "It's strange when you think about it.",
+    "Out of all the places we could have been, all the people we could have met, and all the different ways our lives could have gone—",
+    "somehow, it was me and you.",
+    "And that's how our story began."
   ],
   storySignoff: "— always yours 🐼",
 

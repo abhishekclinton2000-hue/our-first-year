@@ -297,51 +297,66 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }, { passive: true });
 
-                          /* ---------- Music ---------- */
-                          var musicBtn = $('musicBtn');
-  var bgMusic = $('bgMusic');
-  bgMusic.src = CONFIG.musicFile;
-  var songName = CONFIG.songTitle ? '“' + CONFIG.songTitle + '”' : 'Our Song';
+                          /* ---------- Music (plays from the artist's official YouTube video) ---------- */
+  var musicBtn = $('musicBtn');
+  var songName = CONFIG.songTitle ? '"' + CONFIG.songTitle + '"' : 'Our Song';
   var playLabel = '🎵 Play ' + songName;
   var pauseLabel = '🔇 Pause ' + songName;
   musicBtn.textContent = playLabel;
   var playing = false;
+  var ytPlayer = null;
+  var ytReady = false;
+  var pendingPlay = false;
   function musicMissingMessage() {
-    var who = CONFIG.songTitle ? (' (' + CONFIG.songTitle + (CONFIG.songArtist ? ' — ' + CONFIG.songArtist : '') + ')') : '';
-    showToast('Add the song file to the music folder and name it exactly: our-song.mp3' + who);
+    var who = CONFIG.songTitle ? (' (' + CONFIG.songTitle + (CONFIG.songArtist ? ' - ' + CONFIG.songArtist : '') + ')') : '';
+    showToast('Could not load the song right now' + who + '. Please check your connection and try again.');
+  }
+  function createYtPlayer() {
+    ytPlayer = new YT.Player('ytPlayer', {
+      height: '1',
+      width: '1',
+      videoId: CONFIG.musicVideoId,
+      playerVars: { autoplay: 0, controls: 0, playsinline: 1 },
+      events: {
+        onReady: function () {
+          ytReady = true;
+          if (pendingPlay) { pendingPlay = false; ytPlayer.playVideo(); }
+        },
+        onStateChange: function (e) {
+          if (e.data === YT.PlayerState.PLAYING) {
+            playing = true;
+            musicBtn.textContent = pauseLabel;
+          } else if (e.data === YT.PlayerState.PAUSED || e.data === YT.PlayerState.ENDED) {
+            playing = false;
+            musicBtn.textContent = playLabel;
+          }
+        },
+        onError: function () {
+          playing = false;
+          musicBtn.textContent = playLabel;
+          musicMissingMessage();
+        }
+      }
+    });
+  }
+  if (CONFIG.musicVideoId) {
+    if (window.YT && window.YT.Player) {
+      createYtPlayer();
+    } else {
+      window.onYouTubeIframeAPIReady = createYtPlayer;
+    }
   }
   musicBtn.addEventListener('click', function () {
+    if (!CONFIG.musicVideoId) { musicMissingMessage(); return; }
     if (!playing) {
-      var settled = false;
-      // Fail-safe: on some browsers/devices play() can hang without ever
-    // resolving or rejecting when the audio file is missing. If that
-    // happens, still show the friendly reminder instead of the button
-    // silently doing nothing.
-    var failSafe = setTimeout(function () {
-      if (settled) return;
-      settled = true;
-      musicMissingMessage();
-    }, 2500);
-      bgMusic.play().then(function () {
-        if (settled) return;
-        settled = true;
-        clearTimeout(failSafe);
-        playing = true;
-        musicBtn.textContent = pauseLabel;
-      }).catch(function () {
-        if (settled) return;
-        settled = true;
-        clearTimeout(failSafe);
-        musicMissingMessage();
-      });
-    } else {
-      bgMusic.pause();
-      playing = false;
-      musicBtn.textContent = playLabel;
+      if (ytReady && ytPlayer) {
+        ytPlayer.playVideo();
+      } else {
+        pendingPlay = true;
+      }
+    } else if (ytPlayer) {
+      ytPlayer.pauseVideo();
     }
-  });
-  bgMusic.addEventListener('error', function () {
-    if (playing) { playing = false; musicBtn.textContent = playLabel; }
   });
 
                           /* ---------- Scroll reveal animations ---------- */

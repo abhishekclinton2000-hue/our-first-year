@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>One Year of Us ❤️</title>
+<meta name="description" content="One Year of Us — a little anniversary website made with love.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>❤️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="floating-hearts" id="floatingHearts" aria-hidden="true"></div>
+
+<button id="musicBtn" class="music-btn">🎵 Play Our Song</button>
+<audio id="bgMusic" loop preload="none"></audio>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<section class="hero" id="hero">
+  <p class="hero-eyebrow" id="heroEyebrow">Our First Year Together 🐼❤️</p>
+  <h1 class="script-heading hero-title" id="heroTitle">One Year of Us ❤️</h1>
+  <p class="hero-sub" id="heroSub"></p>
+
+  <div class="counter" id="counter">
+    <p class="counter-label" id="counterLabel"></p>
+    <div class="counter-grid">
+      <div class="counter-box"><span class="counter-num" id="cDays">0</span><span class="counter-unit">days</span></div>
+      <div class="counter-box"><span class="counter-num" id="cHours">0</span><span class="counter-unit">hours</span></div>
+      <div class="counter-box"><span class="counter-num" id="cMins">0</span><span class="counter-unit">minutes</span></div>
+      <div class="counter-box"><span class="counter-num" id="cSecs">0</span><span class="counter-unit">seconds</span></div>
+    </div>
+    <p class="counter-note" id="counterNote"></p>
+  </div>
+
+  <div class="scroll-cue"><span>scroll down</span><div class="scroll-arrow">↓</div></div>
+</section>
+
+<section class="section photos-section" id="photos">
+  <h2 class="script-heading section-title">Our Memory Wall 📸</h2>
+  <p class="section-sub">A few of my favorite moments with you · tap a photo to see it big</p>
+  <div class="photo-wall" id="photoWall"></div>
+</section>
+
+<section class="section story-section" id="story">
+  <h2 class="script-heading section-title">Our Story</h2>
+  <p class="section-sub" id="storySub"></p>
+  <div class="intro-card reveal" id="storyCard">
+    <div id="storyText"></div>
+    <span class="intro-signoff" id="storySignoff"></span>
+  </div>
+</section>
+
+<section class="section moments-section" id="moments">
+  <h2 class="script-heading section-title">Our Little Moments 🐼❤️</h2>
+  <p class="section-sub">Little pieces of our story, just for you</p>
+  <div class="moments-grid" id="momentsGrid"></div>
+</section>
+
+<section class="section timeline-section" id="timeline">
+  <h2 class="script-heading section-title">One Year With You</h2>
+  <p class="section-sub">Every step of the way</p>
+  <div class="timeline" id="timelineList"></div>
+</section>
+
+<section class="section love-section" id="love">
+  <h2 class="script-heading section-title">20 Reasons I Love You ❤️</h2>
+  <p class="section-sub">Tap a card 🐼</p>
+  <div class="love-grid" id="loveGrid"></div>
+</section>
+
+<section class="section jar-section" id="jar">
+  <h2 class="script-heading section-title">Our Memory Jar 💌</h2>
+  <p class="section-sub" id="jarSub"></p>
+  <div class="jar-wrap">
+    <button class="jar" id="jarBtn" type="button" aria-label="Pull a note out of the memory jar">
+      <span class="jar-lid"></span>
+      <span class="jar-body">
+        <span class="jar-glass"></span>
+        <span class="jar-notes" aria-hidden="true">
+          <span>💌</span><span>💗</span><span>💌</span><span>💕</span><span>💌</span><span>💗</span><span>💌</span>
+        </span>
+        <span class="jar-label">tap me</span>
+      </span>
+    </button>
+    <div class="jar-note" id="jarNote" aria-live="polite">
+      <p id="jarNoteText"></p>
+      <span class="jar-count" id="jarCount"></span>
+    </div>
+  </div>
+</section>
+
+<section class="section letter-section" id="letter">
+  <h2 class="script-heading section-title">A Letter From My Heart 💌</h2>
+  <p class="section-sub">Read it slowly</p>
+  <div class="letter-card reveal">
+    <p class="letter-greeting" id="letterGreeting"></p>
+    <div class="letter-body" id="letterBody"></div>
+    <p class="letter-signoff" id="letterSignoff"></p>
+  </div>
+</section>
+
+<section class="section secret-section" id="secret">
+  <p class="secret-tease">Psst... there's one more thing 👀</p>
+  <button class="secret-btn" id="secretBtn" type="button">Open My Heart ❤️</button>
+  <div class="secret-message" id="secretMessage"><p id="secretText"></p></div>
+</section>
+
+<section class="section final-section" id="final">
+  <div class="burst" id="burst" aria-hidden="true"></div>
+  <div class="final-cover" id="finalCover">
+    <p class="final-tease" id="revealTease"></p>
+    <p class="final-date script-heading" id="revealDate"></p>
+    <button class="reveal-btn" id="revealBtn" type="button">Tap to open ❤️</button>
+  </div>
+  <div class="final-content" id="finalContent">
+    <p class="final-line-1" id="finalLine1"></p>
+    <p class="final-line-2" id="finalLine2"></p>
+    <h2 class="final-big" id="finalBig"></h2>
+    <div class="pulse-heart">❤️</div>
+    <p class="final-closing" id="finalClosing"></p>
+  </div>
+</section>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo">
+  <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Close">&times;</button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev" type="button" aria-label="Previous photo">‹</button>
+  <figure class="lightbox-figure">
+    <img id="lightboxImg" src="" alt="">
+    <figcaption class="lightbox-caption"><span id="lightboxCaption"></span><span class="lightbox-count" id="lightboxCount"></span></figcaption>
+  </figure>
+  <button class="lightbox-nav lightbox-next" id="lightboxNext" type="button" aria-label="Next photo">›</button>
+  <p class="lightbox-hint" id="lightboxHint">swipe or use the arrows</p>
+</div>
+
+<script src="config.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
